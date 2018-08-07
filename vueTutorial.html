@@ -1,0 +1,134 @@
+<HTML>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<div class="header">
+</div>
+<div id="app">
+    <ul>
+        <todo-item v-bind:class="[itemClass(item.id), lastClass(item.id)]" v-for="item in groceryList" 
+            v-bind:todo="item" v-bind:key="item.id"></todo-item>
+    </ul>
+    <button id="add" class="button" v-on:click="showForm()">Add Ingredient</button>
+</div>
+<div class="container" id="container" hidden="true">
+<div class="form" id="form">
+    <p>
+        <label for="name">Item Name: </label>
+        <input class="name" id="name" type="text">
+    </p>
+    <p>
+        <label for="price">Item Price: </label>
+        <input class="price" id="price" type="text">
+    </p>
+    <p>
+            <label for="calories">Calories: </label>
+            <input type="text" class="calories" id="calories">
+    </p>
+    <p>
+            <label for="ss">Serving Size: </label>
+            <input type="text" class="ss" id="ss">
+    </p>
+    <p>
+        <label for="source">Image Source: </label>
+        <input class="source" id="source" type="text">
+    </p>
+</div>
+</div>
+<script type="text/javascript">
+    Vue.component('todo-item', {
+        props: ['todo'],
+        template: '<li><img v-bind:src=todo.source></img><br>{{ todo.name }}<br>${{todo.price}}<nutrional-info v-bind:nutrition="todo.nutritional"></nutrional-info></li>'
+    })
+
+    Vue.component('nutrional-info', {
+        props: ['nutrition'],
+        template: '<p>Serving Size: {{nutrition.ss}}<br><br>Calories per serving: {{nutrition.calories}}</p>'
+    })
+    var app = new Vue({
+        el: '#app',
+        data: {
+            groceryList: [
+                { 
+                    id: 0, 
+                    name: 'Orange', 
+                    price: 0.89,
+                    nutritional: {
+                        calories: 69,
+                        ss: '1 fruit'
+                    },
+                    source: 'https://www.thesourcery.co.nz/wp-content/uploads/2017/05/orange-fruit-vitamins-healthy-eating-52533.jpeg'
+                },
+                { 
+                    id: 1,
+                    name: 'Broccoli',
+                    price: '1.74/lb',
+                    nutritional: {
+                        calories: 50,
+                        ss: '148 g' 
+                    },
+                    source: 'https://i5.walmartimages.ca/images/Large/787/433/6000194787433.jpg?odnBound=460' 
+                },
+                { 
+                    id: 2,
+                    name: 'Chicken',
+                    price: '1.99/lb',
+                    nutritional: {
+                        calories: 335,
+                        ss: '1 cup' 
+                    },
+                    source: 'http://damassupermarket.com/wp-content/uploads/2016/06/Cooked-Chicken.jpg' 
+                }
+            ]
+        },
+        methods : {
+            itemClass: function(id) {
+                return id % 2 == 0 ? 'even' : 'odd'
+            },
+            maxId: function() {
+                var max = 0
+                for (var i = 0; i < this.groceryList.length; i++) { 
+                    if (this.groceryList[i].id > max) {
+                        max = this.groceryList[i].id
+                    }
+                }
+                return max
+            },
+            lastClass: function(id) {
+                if (id == this.maxId()) {
+                    return 'last'
+                }
+                return ''
+            },
+            showForm : function(){
+                if (document.getElementById("add").innerHTML === "Add Ingredient") {
+                    document.getElementById("container").hidden = false;
+                    document.getElementById("add").innerHTML = "Submit"
+                } else {
+                    var name = document.getElementById("name").value;
+                    var price = document.getElementById("price").value;
+                    var source = document.getElementById("source").value;
+                    var calories = document.getElementById("calories").value;
+                    var ss = document.getElementById("ss").value;
+                    this.groceryList.push({
+                        id: 3,
+                        name: name,
+                        price: price,
+                        nutritional: {
+                            calories: calories,
+                            ss: ss
+                        },
+                        source: source
+                    });
+                    document.getElementById("container").hidden = true;
+                    document.getElementById("add").innerHTML = "Add Ingredient"
+                }
+            }
+        }
+    })
+
+</script>
+
+<body>

@@ -1,0 +1,70 @@
+.header {
+    background-color: #761010;
+    width: 100%;
+    height: 25px;
+}
+li {
+  border-style: solid;
+  border-color: black;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  align-content: center;
+  position: relative;
+  font-family: 'Courier New', Courier, monospace;
+  height: 30px;
+  width: 250px;
+  margin-bottom: 10px;
+  border-top-width: 2px;
+  border-bottom-width: 2px;
+  border-left-width: 2px;
+  border-right-width: 0px;
+}
+.even {
+  background-color: lightgray;
+}
+
+.odd {
+  background-color: seashell;
+}
+
+.last {
+  border-right-width: 2px;
+}
+
+img {
+  margin-bottom: 10px;
+  height: 100px;
+  width: 125px;
+}
+
+.button {
+  cursor: pointer;
+  margin-left: 17%;
+  border: none;
+  color: white;
+  position: relative;
+  background-color: dodgerblue;
+  padding: 15px 32px;
+  font-size: 16px;
+}
+
+.form {
+  margin-top: 10px;
+  margin-left: 17%;
+  position: relative;
+  display: table;
+}
+
+.nutritional {
+  display: table-row;
+}
+
+label {
+  display: table-cell;
+}
+
+p {
+  display: table-row;
+}
+
